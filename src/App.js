@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import commerce from "./lib/commerce";
+import { Navbar } from "./components/parts";
 
-function App() {
+const App = () => {
+  commerce.products
+    .list()
+    .then(({ data }) => console.log(data.map(prod => prod.name)));
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
     </div>
   );
-}
+};
 
 export default App;
