@@ -11,6 +11,10 @@ const GlobalStyles = createGlobalStyle`
     font-family: "Raleway", sans-serif;
   }
 
+  img {
+    max-width: 100%;
+  }
+
   button, input, textarea {
     font-family: inherit;
   }

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Route, Switch } from "react-router";
 import commerce from "./lib/commerce";
-
-import { Navbar } from "./components/parts";
+import { Footer, Navbar } from "./components/parts";
 import { CategoryArchive } from "./components/pages";
+import { Container } from "./components/presentational";
 
 const App = () => {
   const [instruments, setInstruments] = useState(null);
@@ -23,13 +23,16 @@ const App = () => {
   return (
     <div className="App">
       <Navbar categories={instruments} />
-      <Switch>
-        <Route
-          exact
-          path="/category/:slug"
-          render={rp => <CategoryArchive slug={rp.match.params.slug} />}
-        />
-      </Switch>
+      <Container>
+        <Switch>
+          <Route
+            exact
+            path="/category/:slug"
+            render={rp => <CategoryArchive slug={rp.match.params.slug} />}
+          />
+        </Switch>
+      </Container>
+      <Footer />
     </div>
   );
 };
