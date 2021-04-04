@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Route, Switch } from "react-router";
-import commerce from "./lib/commerce";
 import { Footer, Navbar } from "./components/parts";
-import { CategoryArchive } from "./components/pages";
+import { Home, CategoryArchive, SingleProduct } from "./components/pages";
 import { Container } from "./components/presentational";
+import commerce from "./lib/commerce";
+import styled from "styled-components";
 
 const App = () => {
   const [instruments, setInstruments] = useState(null);
@@ -12,7 +13,10 @@ const App = () => {
     const fetchCategories = async () => {
       const { data } = await commerce.categories.list();
       const instruments = data
-        .filter(category => category.meta?.type !== "brand")
+        .filter(
+          ({ meta }) =>
+            meta?.type !== "brand" && meta?.type !== "classification"
+        )
         .reverse();
       setInstruments(instruments);
     };
@@ -21,20 +25,36 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App">
+    <StyledApp className="App">
       <Navbar categories={instruments} />
       <Container>
         <Switch>
           <Route
             exact
+            path="/"
+            render={() => <Home categories={instruments} />}
+          />
+          <Route
+            exact
             path="/category/:slug"
             render={rp => <CategoryArchive slug={rp.match.params.slug} />}
+          />
+          <Route
+            exact
+            path="/product/:slug"
+            render={rp => <SingleProduct slug={rp.match.params.slug} />}
           />
         </Switch>
       </Container>
       <Footer />
-    </div>
+    </StyledApp>
   );
 };
+
+const StyledApp = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
 
 export default App;

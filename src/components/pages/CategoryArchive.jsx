@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import commerce from "../../lib/commerce";
-import { Loading, Typography } from "../presentational";
+import { Page, Typography } from "../presentational";
 import { ProductList } from "../utility";
 
 const CategoryArchive = ({ slug }) => {
@@ -30,24 +30,25 @@ const CategoryArchive = ({ slug }) => {
     fetchCategory();
   }, [slug]);
 
-  if (status.type === "loading")
-    return <Loading size="2x" height="4rem" center />;
-
   if (status.type === "error") return <div>Sorry, something went wrong!</div>;
 
   return (
-    <section>
-      <Typography
-        type="h3"
-        textAlign="center"
-        capitalize
-        size="1.75rem"
-        mBot="2rem"
-      >
-        {category.name}
-      </Typography>
-      <ProductList products={products} />
-    </section>
+    <Page loading={status.type === "loading"}>
+      {category && (
+        <>
+          <Typography
+            type="h3"
+            textAlign="center"
+            capitalize
+            size="1.75rem"
+            mBot="2rem"
+          >
+            {category.name}
+          </Typography>
+          <ProductList products={products} />
+        </>
+      )}
+    </Page>
   );
 };
 

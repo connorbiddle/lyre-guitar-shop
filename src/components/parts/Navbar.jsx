@@ -62,7 +62,6 @@ const StyledNavbar = styled.nav`
   position: sticky;
   top: -5rem;
   z-index: 100;
-  margin-bottom: 3rem;
 
   a {
     color: inherit;
