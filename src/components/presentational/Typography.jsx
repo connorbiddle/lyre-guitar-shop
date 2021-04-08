@@ -36,7 +36,7 @@ const sharedStyles = css`
 
 const Paragraph = styled.p`
   ${sharedStyles}
-  line-height: 2;
+  line-height: 1.9;
 `;
 
 const Heading1 = styled.h1`

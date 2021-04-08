@@ -11,7 +11,7 @@ export const fade = (duration = "250ms", delay = "0ms") => {
   `;
 
   return css`
-    animation: ${kf} ease-out ${duration} ${delay};
+    animation: ${kf} ease ${duration} ${delay};
   `;
 };
 

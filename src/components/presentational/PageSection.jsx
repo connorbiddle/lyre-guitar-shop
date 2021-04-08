@@ -13,6 +13,7 @@ const PageSection = styled.section`
 
   &:first-of-type {
     padding-top: 0;
+    ${atSize("md", "padding-top: 20px;")}
   }
 `;
 

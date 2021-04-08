@@ -7,6 +7,8 @@ const theme = {
     midGrey: "#B2B2B2",
     lightGrey: "#EBEBEB",
     white: "#FFFFFF",
+    success: "#64b564",
+    danger: "#c65050",
   },
   breakpoints: {
     sm: "500px",

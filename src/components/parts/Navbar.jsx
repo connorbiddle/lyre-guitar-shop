@@ -1,23 +1,22 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { Logo, Icon, Loading } from "../presentational";
 import { atSize } from "../../style/mixins";
 import { fade } from "../../style/animations";
 
-const Navbar = ({ categories }) => {
+const Navbar = ({ categories, cartQty, startSearch }) => {
   const [expanded, setExpanded] = useState(false);
+  const history = useHistory();
 
   const toggleMenu = () => setExpanded(old => !old);
-
-  const onSearchClick = () => alert("Search!");
-  const onCartClick = () => alert("Cart!");
+  const onCartClick = () => history.push("/cart");
 
   return (
     <StyledNavbar>
       <div className="nav-top">
         <div className="nav-top-left">
-          <Icon button icon="fas fa-search" onClick={onSearchClick} />
+          <Icon button icon="fas fa-search" onClick={startSearch} />
         </div>
         <div className="nav-top-middle">
           <Link to="/">
@@ -29,7 +28,7 @@ const Navbar = ({ categories }) => {
             button
             icon="fas fa-shopping-cart"
             onClick={onCartClick}
-            // badge={}
+            badge={cartQty}
           />
         </div>
       </div>

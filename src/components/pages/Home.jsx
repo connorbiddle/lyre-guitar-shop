@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Page } from "../presentational";
-import { Categories, Showcase } from "../parts";
+import { Showcase } from "../parts";
 import { ProductSection } from "../utility";
 import commerce from "../../lib/commerce";
 
@@ -20,9 +20,9 @@ const Home = ({ categories }) => {
 
   return (
     <Page>
-      <Showcase />
+      <Showcase categories={categories} />
       <ProductSection
-        title="Just In!"
+        title="Just In"
         subtitle="Our newest guitars and equipment. Get them first!"
         products={newProducts}
       />
@@ -31,7 +31,6 @@ const Home = ({ categories }) => {
         subtitle="The gear our customers love most."
         products={topProducts}
       />
-      <Categories categories={categories} />
     </Page>
   );
 };

@@ -33,7 +33,7 @@ const StyledLoading = styled.div`
       `
     )}
 
-  > i {
+  i {
     ${spin()}
   }
 `;

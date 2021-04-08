@@ -1,75 +1,60 @@
-import styled, { css } from "styled-components";
-import { PageSection, Typography } from "../presentational";
-import { Button } from "../utility";
-import { atSize } from "../../style/mixins";
-import ShowcaseImg from "../../assets/showcase.jpg";
+import { Loading, PageSection, Typography } from "../presentational";
+import { ImageLink } from "../utility";
+import {
+  Electric,
+  Acoustic,
+  Bass,
+  Pedal,
+  Amplifier,
+} from "../../assets/categories";
+import styled from "styled-components";
 
-const Showcase = () => {
+const Showcase = ({ categories }) => {
+  const categoryImages = {
+    "Electric Guitars": Electric,
+    "Bass Guitars": Bass,
+    "Acoustic Guitars": Acoustic,
+    "Guitar Pedals": Pedal,
+    Amplifiers: Amplifier,
+  };
+
   return (
     <PageSection>
-      <ShowcaseFigure>
-        <figcaption>
-          <Typography type="h3">Lorem ipsum dolor sit amet.</Typography>
-          <Button large>Lorem Ipsum</Button>
-        </figcaption>
-        <img src={ShowcaseImg} alt="" />
-      </ShowcaseFigure>
+      <Typography type="h2" textAlign="center" size="2rem" capitalize>
+        Welcome to Lyre!
+      </Typography>
+      <Typography type="h3" fontWeight="400" textAlign="center">
+        Tell us what you're looking for to get started...
+      </Typography>
+
+      {categories ? (
+        <Links>
+          {categories.map(({ id, name, slug }) => (
+            <ImageLink
+              key={id}
+              url={`/category/${slug}`}
+              image={categoryImages[name]}
+              text={name}
+            />
+          ))}
+        </Links>
+      ) : (
+        <Loading center size="2x" height="10rem" />
+      )}
     </PageSection>
   );
 };
 
-const ShowcaseFigure = styled.figure`
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  padding-bottom: 56.25%;
+const Links = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 -1rem;
 
-  img {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+  > a {
+    flex-basis: 208px;
+    margin: 1rem;
   }
-
-  figcaption {
-    position: absolute;
-    top: 50%;
-    left: 1rem;
-    right: 1rem;
-    color: #fff;
-    text-align: center;
-    transform: translateY(-50%);
-    z-index: 2;
-  }
-
-  &::after {
-    content: "";
-    z-index: 1;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.35);
-  }
-
-  ${atSize(
-    "md",
-    css`
-      padding-bottom: 32.5%;
-
-      figcaption {
-        text-align: left;
-        left: 3rem;
-        right: 3rem;
-
-        h3 {
-          font-size: 2.5rem;
-          margin-bottom: 1.25rem;
-        }
-        button {
-          font-size: 1.35rem;
-        }
-      }
-    `
-  )}
 `;
 
 export default Showcase;

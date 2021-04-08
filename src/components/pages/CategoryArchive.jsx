@@ -45,7 +45,18 @@ const CategoryArchive = ({ slug }) => {
           >
             {category.name}
           </Typography>
-          <ProductList products={products} />
+          {category.description && (
+            <Typography textAlign="center" size="1.2rem" mBot="3.5rem">
+              {category.description}
+            </Typography>
+          )}
+          {products.data?.length > 0 ? (
+            <ProductList products={products} />
+          ) : (
+            <Typography size="1.25rem" textAlign="center">
+              There are no products in this category yet - check back later!
+            </Typography>
+          )}
         </>
       )}
     </Page>

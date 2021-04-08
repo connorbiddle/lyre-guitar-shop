@@ -11,6 +11,10 @@ const GlobalStyles = createGlobalStyle`
     font-family: "Raleway", sans-serif;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   img {
     max-width: 100%;
   }

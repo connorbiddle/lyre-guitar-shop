@@ -18,7 +18,7 @@ const ImageGallery = ({ className, images }) => {
 
     const img = imgElement.current;
     const { left, top, width, height } = img.getBoundingClientRect();
-    img.style.transform = "scale(2.25)";
+    img.style.transform = "scale(2.5)";
 
     const moveImageZoom = e => {
       const mousePos = {
