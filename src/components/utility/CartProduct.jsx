@@ -3,19 +3,19 @@ import { Icon, Typography } from "../presentational";
 import commerce from "../../lib/commerce";
 import { atSize } from "../../style/mixins";
 
-const CartProduct = ({ product, refresh }) => {
+const CartProduct = ({ product, setCart }) => {
   const { id, name, media, quantity, line_total } = product;
 
   const changeQuantity = quantity => {
     return async () => {
-      await commerce.cart.update(id, { quantity });
-      refresh();
+      const res = await commerce.cart.update(id, { quantity });
+      setCart(res.cart);
     };
   };
 
   const deleteProduct = async () => {
-    await commerce.cart.remove(id);
-    refresh();
+    const res = await commerce.cart.remove(id);
+    setCart(res.cart);
   };
 
   return (

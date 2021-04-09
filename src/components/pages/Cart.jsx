@@ -8,21 +8,20 @@ const Cart = ({ setCartQty }) => {
   const [cart, setCart] = useState([]);
   const [status, setStatus] = useState({ type: "loading" });
 
-  const fetchCart = async () => {
-    setStatus({ type: "loading" });
-    try {
-      const res = await commerce.cart.retrieve();
-      setCart(res);
-      setCartQty(res.line_items.length);
-      setStatus({ type: "success" });
-    } catch (e) {
-      setStatus({ type: "error" });
-    }
-  };
-
   useEffect(() => {
+    const fetchCart = async () => {
+      setStatus({ type: "loading" });
+      try {
+        const res = await commerce.cart.retrieve();
+        setCart(res);
+        setCartQty(res.line_items.length);
+        setStatus({ type: "success" });
+      } catch (e) {
+        setStatus({ type: "error" });
+      }
+    };
     fetchCart();
-  }, []);
+  }, [setCartQty]);
 
   return (
     <Page loading={status.type === "loading"}>
@@ -34,7 +33,7 @@ const Cart = ({ setCartQty }) => {
                 <CartProduct
                   key={product.id}
                   product={product}
-                  refresh={fetchCart}
+                  setCart={setCart}
                 />
               ))}
             </ul>
